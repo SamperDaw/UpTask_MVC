@@ -15,7 +15,7 @@ class Usuario extends ActiveRecord{
         $this->password = $args['password'] ?? '';
         $this->password2 = $args['password2'] ?? '';
         $this->token = $args['token'] ?? '';
-        $this->confirmado = $args['confirmado'] ?? '';
+        $this->confirmado = $args['confirmado'] ?? 0;
     }
 
     //Validacion de creacion de cuentas
@@ -32,7 +32,7 @@ class Usuario extends ActiveRecord{
             self::$alertas['error'][] = 'El password no puede ir vacio';
         }
 
-        if(strlen(!$this->password) <6) {
+        if(strlen($this->password) < 6) {
             self::$alertas['error'][] = 'El password debe tener al menos 6 caracteres';
         }
 
@@ -42,5 +42,12 @@ class Usuario extends ActiveRecord{
 
         return self::$alertas;
   }
-
+  //hasea el password
+  public function hashPassword(){
+    $this->password = password_hash($this->password,PASSWORD_BCRYPT);
+  }
+  //Generar un token
+  public function crearToken(){
+    $this->token = md5(uniqid());
+  }
 }

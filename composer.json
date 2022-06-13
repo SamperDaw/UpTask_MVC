@@ -8,5 +8,8 @@
             "Controllers\\" : "./controllers",
             "Model\\" : "./models"
         }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.6"
     }
 }
