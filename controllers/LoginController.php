@@ -35,12 +35,14 @@ class LoginController{
         ]);
     }
 
-    public static function recuperar() {
-        echo "Desde Recuperar";
-
+    public static function recuperar(Router $router) {
         if($_SERVER['REQUEST_METHOD']=== 'POST'){
 
         }
+        //Muestra la vista
+        $router->render('auth/recuperar',[
+            'titulo'=>'Olvide mis Password'
+        ]);
     }
 
     public static function restablecer() {
