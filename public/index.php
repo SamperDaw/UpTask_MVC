@@ -21,8 +21,8 @@ $router->get('/recuperar', [LoginController::class, 'recuperar']);
 $router->post('/recuperar', [LoginController::class, 'recuperar']);
 
 //Enviar nuevo Password
-$router->get('/restablecer', [LoginController::class, 'restablecer']);
-$router->post('/restablecer', [LoginController::class, 'restablecer']);
+$router->get('/reestablecer', [LoginController::class, 'reestablecer']);
+$router->post('/reestablecer', [LoginController::class, 'reestablecer']);
 
 //Confirmacion de cuenta
 $router->get('/mensaje', [LoginController::class, 'mensaje']);
