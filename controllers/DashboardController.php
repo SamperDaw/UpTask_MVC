@@ -6,13 +6,17 @@ use Model\Proyecto;
 
 class DashboardController{
     public static function index(Router $router){
-
         session_start();
-
         isAuth();
+        
+        $id = $_SESSION['id'];
 
+        $proyectos = Proyecto::belongsTo('propietarioId',$id);
+        
+       
         $router->render('dashboard/index', [
-            'titulo' => 'Proyectos'
+            'titulo' => 'Proyectos',
+            'proyectos' => $proyectos
         ]);
     }
 
@@ -42,8 +46,6 @@ class DashboardController{
                 header('Location: /proyecto?id=' . $proyecto->url);
 
             }
-
-
         }
 
         $router->render('dashboard/crear-proyecto', [
@@ -52,6 +54,29 @@ class DashboardController{
             
         ]);
     }
+
+
+
+    public static function proyecto(Router $router){
+        session_start();
+        isAuth();
+
+        $token= $_GET['id'];
+      
+        if(!$token)header('Location: /dashboard');
+        //Revisar que solo ves tus proyectos
+        $proyecto = Proyecto::where('url', $token);
+        
+        if($proyecto->propietarioId !== $_SESSION['id']){
+            header('Location: /dashboard');
+        }
+
+        $router->render('dashboard/proyecto',[
+            'titulo'=> $proyecto->proyecto
+        ]);
+    }
+
+
 
     public static function perfil(Router $router){
 
