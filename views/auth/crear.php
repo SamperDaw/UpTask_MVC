@@ -9,10 +9,10 @@
         <form class="formulario" action="/crear" method="POST">
 
         <div class="campo">
-                <label for="text">Nombre</label>
-                <input  type="nombre" 
-                        id="nombre" 
-                        placeholder="Tu Nombre" 
+                <label for="nombre">nombre</label>
+                <input  type="text" 
+                        id="nombre"
+                        placeholder="Tu nombre"
                         name="nombre"
                         value="<?php echo $usuario->nombre; ?>"
                         />
