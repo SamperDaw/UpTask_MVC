@@ -1,12 +1,12 @@
 <?php
 
-namespace Proyecto;
+namespace Model;
 
 use Model\ActiveRecord;
 
 class Proyecto extends ActiveRecord{
     protected static $tabla ='proyectos';
-    protected static $columnasDB = ['id','proyecto','url','propietarioId '];
+    protected static $columnasDB = ['id','proyecto','url','propietarioId'];
 
     public function __construct($args=[]){
         
@@ -15,5 +15,12 @@ class Proyecto extends ActiveRecord{
         $this->url = $args['url'] ?? '';
         $this->propietarioId = $args['propietarioId'] ?? '';
 
+    }
+
+    public function validarProyecto(){
+        if(!$this->proyecto){
+            self::$alertas['error'][] = 'El nombre del proyecto es Obligatorio';
+        }
+        return self::$alertas;
     }
 }

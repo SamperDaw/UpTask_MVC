@@ -32,6 +32,7 @@ $router->get('/confirmar', [LoginController::class, 'confirmar']);
 //ZONA DE PROYECTOS
 $router->get('/dashboard', [DashBoardController::class, 'index']);
 $router->get('/crear-proyecto', [DashBoardController::class, 'crear_proyecto']);
+$router->post('/crear-proyecto', [DashBoardController::class, 'crear_proyecto']);
 $router->get('/perfil', [DashBoardController::class, 'perfil']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
