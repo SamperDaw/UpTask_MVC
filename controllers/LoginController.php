@@ -77,12 +77,41 @@ class LoginController{
     }
 
     public static function recuperar(Router $router) {
+        $alertas=[];
         if($_SERVER['REQUEST_METHOD']=== 'POST'){
+            $usuario = new Usuario($_POST);
+            $alertas = $usuario->validarEmail();
+            if(empty($alertas)){
+                //buscar usuario
+                $usuario = Usuario::where('email',$usuario->email);
 
+                if($usuario && $usuario->confirmado){
+
+                    //generar nuevo token
+                    $usuario->crearToken();
+                    unset($usuario->password2);
+                    //Actualizar usuario
+                    $usuario->guardar();
+                    //Enviar el email
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                    $email->enviarInstrucciones();
+
+                    //Imprimi la laerta
+                    Usuario::setAlerta('exito','Hemos enviado las instrucciones al correo');
+                }else{
+                    Usuario::setAlerta('error','El usuario no existe o no esta confirmado');
+                    
+                }             
+            }
+            
         }
+
+        $alertas = Usuario::getAlertas();
+
         //Muestra la vista
         $router->render('auth/recuperar',[
-            'titulo'=>'Olvide mis Password'
+            'titulo'=>'Olvide mis Password',
+            'alertas'=>$alertas
         ]);
     }
 

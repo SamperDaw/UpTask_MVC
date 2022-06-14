@@ -4,6 +4,7 @@
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Recupera tu Contraseña</p>
 
+        <?php include_once __DIR__ .'/../templates/alertas.php';?>
 
         <form class="formulario" action="/recuperar" method="POST">
        
