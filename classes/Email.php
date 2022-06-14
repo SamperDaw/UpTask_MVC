@@ -32,12 +32,13 @@ class Email{
         $mail->isHTML(TRUE);
         $mail->CharSet='UTF-8';
 
-        $contenido='<html>';
-        $contenido.="<p><strong>Hola " . $this->email . "</strong>Has Creado tu cuenta en taskmper, solo debes confirmarla en el siguiente enlace</p>";
-        $contenido.="<p>Presiona aqui:<a href='htttp://localhost:3000/confirmar
-        ?token=".$this->token . "'>Confirmar Cuenta</a></p>";
+        $contenido ='<html>';
+        $contenido .="<p><strong>Hola " . $this->nombre . "</strong> Has Creado tu cuenta 
+        en taskmper, solo debes confirmarla en el siguiente enlace</p>";
+        $contenido .="<p>Presiona aqui: <a href='http://localhost:3000/confirmar?token=" .
+        $this->token . "'>Confirmar Cuenta</a></p>";
         $contenido .="<p>Si tu no creaste esta cuenta, puedes ignorar este mensaje</p>";
-        $contenido.='</html>';
+        $contenido .='</html>';
         $mail->Body = $contenido;
 
         //Enviar email
