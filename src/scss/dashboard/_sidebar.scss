@@ -1,0 +1,31 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.sidebar{
+    background-color: v.$naranja;
+    padding: 2rem;
+    h2{
+        color: v.$negro;
+        margin: 0;
+        text-align: center;
+    }
+    .sidebar-nav{
+        margin-top: 5rem;
+        a{
+            color:v.$negro;
+            display: block;
+            margin-bottom: 1.5rem;
+            padding: .7rem;
+            transition-property: background-color;
+            transition-duration: 300ms;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.5rem;
+
+            &:hover{
+                background-color:darken(v.$naranja,20%);
+                border-radius: .5rem;
+            }
+        }
+    }
+}

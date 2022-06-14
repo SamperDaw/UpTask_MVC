@@ -52,7 +52,7 @@ class LoginController{
     }
 
     public static function logout() {
-        echo "Desde Login";
+        echo "Desde logogut";
 
     }
 
