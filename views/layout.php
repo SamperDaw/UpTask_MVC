@@ -12,6 +12,8 @@
 <body>
 
     <?php echo $contenido; ?>
+
+    
     <?php echo $script ?? ''; ?>
 
 </body>
