@@ -5,6 +5,7 @@ require_once __DIR__ . '/../includes/app.php';
 use Controllers\LoginController;
 use MVC\Router;
 use Controllers\DashBoardController;
+use Controllers\TareaController;
 $router = new Router();
 
 //Login
@@ -36,5 +37,10 @@ $router->post('/crear-proyecto', [DashBoardController::class, 'crear_proyecto'])
 $router->get('/proyecto', [DashBoardController::class, 'proyecto']);
 $router->get('/perfil', [DashBoardController::class, 'perfil']);
 
+//API para las tareas
+$router->get('/api/tareas', [tareaController::class], 'index');
+$router->post('/api/tarea', [tareaController::class], 'crear');
+$router->post('/api/tarea/actualizar', [tareaController::class], 'actualizar');
+$router->post('/api/tarea/eliminar', [tareaController::class], 'eliminar');
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
