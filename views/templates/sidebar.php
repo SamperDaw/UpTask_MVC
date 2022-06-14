@@ -2,8 +2,8 @@
     <h2>TaskMper</h2>
 
     <nav class="sidebar-nav">
-        <a href="/dashboard">Proyectos</a>
-        <a href="/crear-proyecto">Crear Proyecto</a>
-        <a href="/perfil">Perfil</a>
+        <a Class="<?php echo($titulo === 'Proyectos') ? 'activo' : ''; ?>" href="/dashboard">Proyectos</a>
+        <a Class="<?php ?>" href="/crear-proyecto">Crear Proyecto</a>
+        <a Class="<?php ?>" href="/perfil">Perfil</a>
     </nav>
 </aside>

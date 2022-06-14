@@ -22,7 +22,8 @@
             font-weight: bold;
             font-size: 1.5rem;
 
-            &:hover{
+            &:hover,
+            &.activo{
                 background-color:darken(v.$naranja,20%);
                 border-radius: .5rem;
             }
