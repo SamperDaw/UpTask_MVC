@@ -5,12 +5,17 @@
         <p class="descripcion-pagina">Iniciar Sesión</p>
 
 
-        <form class="formulario" action="/" method="POST">       
+        <form class="formulario" action="/" method="POST">
+        <div class="campo">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Tu email" name="email"/>
+            </div>
+
             <div class="campo">
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Tu password" name="password"/>
             </div>
-            <input type="submit" class="boton" value="Guardar contraseña">
+            <input type="submit" class="boton" value="Iniciar Sesion">
         </form>
 
         <div class="acciones">
