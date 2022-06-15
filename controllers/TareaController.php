@@ -57,12 +57,13 @@ class TareaController{
             if(!$proyecto || $proyecto->propietarioId !== $_SESSION['id']){
                 $respuesta = [
                     'tipo' => 'error',
-                    'mensaje' => 'Hubo un error al agactualizar la tarea'
+                    'mensaje' => 'Hubo un error al actualizar la tarea'
                 ];
                 echo json_encode($respuesta);
                 return;
                 
             }
+
             $tarea = new Tarea($_POST);
             $tarea->proyectoId = $proyecto->id;
 
@@ -83,7 +84,30 @@ class TareaController{
 
     public static function eliminar(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+             //validar que exista el proyecto
+             $proyecto = Proyecto::where('url', $_POST['proyectoId']);
             
+
+             session_start();
+             if(!$proyecto || $proyecto->propietarioId !== $_SESSION['id']){
+                 $respuesta = [
+                     'tipo' => 'error',
+                     'mensaje' => 'Hubo un error al agactualizar la tarea'
+                 ];
+                 echo json_encode($respuesta);
+                 return;                
+             }
+
+             $tarea = new Tarea($_POST);
+             $resultado = $tarea->eliminar();
+
+             $resultado = [
+                'resultado' => $resultado,
+                'mensaje' =>'Eliminado Correctamente',
+                'tipo' => 'exito'
+             ];
+
+             echo json_encode($resultado);
         }
     }
 }
