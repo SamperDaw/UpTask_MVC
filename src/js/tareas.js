@@ -239,14 +239,21 @@
             
             if(resultado.respuesta.tipo === 'exito'){          
                 Swal.fire(
-                  resultado.mensaje,
-                  resultado.mensaje,
+                  resultado.respuesta.mensaje,
+                  resultado.respuesta.mensaje,
                   'success'      
-                )
+                );
+
+                const modal = document.querySelector('.modal');
+                if(modal){
+                    modal.remove();
+                }
+              
 
                 tareas = tareas.map(tareaMemoria=>{
                     if(tareaMemoria.id===id){
                         tareaMemoria.estado = estado;
+                        tareaMemoria.nombre = nombre;
                                       
                     }
                     return tareaMemoria;

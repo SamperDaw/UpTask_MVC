@@ -8,6 +8,11 @@
         id="agregar-tarea"
     >&#43; Nueva Tarea</button>        
     </div>
+    <div class="filtros" id="filtros">
+        <div class="filtros-inputs">
+            
+        </div>
+    </div>
     <ul id="listado-tareas" class="listado-tareas">
 
     </ul>
