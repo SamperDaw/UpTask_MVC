@@ -56,7 +56,7 @@
             btnEstadoTarea.textContent = estados[tarea.estado];
             btnEstadoTarea.dataset.btnEstadoTarea = tarea.estado;
             btnEstadoTarea.ondblclick = function(){
-                cambiarEstadoTarea(tarea);
+                cambiarEstadoTarea({...tarea});
 
             }
 
@@ -64,6 +64,9 @@
             btnEliminarTarea.classList.add('eliminar-tarea');
             btnEliminarTarea.dataset.idTarea = tarea.id;
             btnEliminarTarea.textContent = 'Eliminar';
+            btnEliminarTarea.ondblclick = function(){
+                confirmarEliminarTarea({...tarea});
+            }
 
             opcionesDiv.appendChild(btnEstadoTarea);
             opcionesDiv.appendChild(btnEliminarTarea);
@@ -171,7 +174,7 @@
             });
 
             const resultado = await respuesta.json();
-            console.log(resultado);
+            
 
             mostrarAlerta(resultado.mensaje, resultado.tipo,
                 document.querySelector('.formulario legend'));
@@ -199,8 +202,55 @@
     }
 
     function cambiarEstadoTarea(tarea){
-        console.log()
+        const nuevoEstado = tarea.estado === "1" ? "0" : "1";
+        tarea.estado = nuevoEstado;
+        actualizarTarea(tarea);
+        
     }
+    async function actualizarTarea(tarea){
+        const {estado, id, nombre, proyectoId}=tarea;
+        const datos = new FormData();
+        datos.append('id',id);
+        datos.append('nombre',nombre);
+        datos.append('estado',estado);  
+        datos.append('proyectoId', obtenerProyecto());
+        
+        try {
+            const url= 'http://localhost:3000/api/tarea/actualizar';
+            const respuesta = await fetch(url, {
+                method: 'POST',
+                body: datos               
+            });
+            const resultado = await respuesta.json();
+            
+            if(resultado.respuesta.tipo === 'exito'){
+            mostrarAlerta(
+                resultado.respuesta.mensaje,
+                resultado.respuesta.tipo,
+                document.querySelector('.contenedor-nueva-tarea'));
+
+                tareas = tareas.map(tareaMemoria=>{
+                    if(tareaMemoria.id===id){
+                        tareaMemoria.estado = estado;
+                                      
+                    }
+                    return tareaMemoria;
+                });
+                mostrarTareas();
+            }
+            
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function confirmarEliminarTarea(tarea){
+        const respuesta = confirm('Eliminar?');
+        console.log(respuesta);
+    }
+
+
 
     function obtenerProyecto() {
         const proyectoParams = new URLSearchParams(window.location.search);
@@ -210,7 +260,6 @@
 
     function limpiarTareas() {
         const listadoTareas = document.querySelector('#listado-tareas');
-
         while (listadoTareas.firstChild) {
             listadoTareas.removeChild(listadoTareas.firstChild)
         }
